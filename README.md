@@ -19,8 +19,8 @@ sudo modprobe br_netfilter
 
 # Setup required sysctl params, these persist across reboots.
 cat <<EOF | sudo tee /etc/sysctl.d/99-kubernetes-cri.conf
-net.bridge.bridge-nf-call-iptables  = 1
-net.ipv4.ip_forward                 = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
 net.bridge.bridge-nf-call-ip6tables = 1
 EOF
 
@@ -50,10 +50,11 @@ sudo sysctl --system
 #### (1) Install the container runtime (containerd in this case) and add containerd's configuration
 ```
 sudo apt-get update && sudo apt-get install -y containerd
-mkdir -p /etc/containerd
+sudo mkdir -p /etc/containerd
 sudo containerd config default | sudo tee /etc/containerd/config.toml
 sudo systemctl restart containerd
 sudo swapoff -a # Swap disabled. You MUST disable swap in order for the kubelet to work properly.
+sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
 ```
 
 
@@ -65,11 +66,22 @@ sudo apt-get update && sudo apt-get install -y apt-transport-https ca-certificat
 #### (2) Download the Google Cloud public signing key:
 ```
 sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+# or curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 ```
 
-#### (3) Add the Kubernetes apt repository:
+#### (3) Add the Kubernetes repository list apt repository: (one way)
 ```
 echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+```
+
+#### (3) Add the Kubernetes repository list apt repository: (second way)
+```
+Add Kubernetes to repository list:
+
+cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
+deb https://apt.kubernetes.io/ kubernetes-xenial main
+EOF
 ```
 
 
@@ -86,5 +98,30 @@ CIDR RANGE for pods
 sudo kubeadm init --pod-network-cidr 192.168.0.0/16
 ```
 
+#### Set kubectl access from the control plane:
+```
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+
+#### test the cluster 
+```
+kubectl version
+```
+#### Install the Calico Network Add-On
+```
+kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+```
 
 
+#### Get the token from the control plane to run on the worker-nodes to join the cluster as a worker
+```
+kubeadm token create --print-join-command
+```
+
+
+#### Get the node joined 
+```
+kubectl get nodes
+```
