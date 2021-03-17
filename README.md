@@ -1,2 +1,2 @@
-# k8s-CKAD
-k8s-CKAD traing for the certification
+# k8s-CKAD (Kubernetes)
+k8s-CKAD traing for the certification (Kubernetes)
