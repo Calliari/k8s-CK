@@ -121,7 +121,7 @@ kubeadm token create --print-join-command
 ```
 
 
-#### Get the node joined 
+#### Display/show/get all the kubernetes worker-nodes joined and the roles assigned to them
 ```
 kubectl get nodes
 ```
