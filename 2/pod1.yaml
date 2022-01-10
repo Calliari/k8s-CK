@@ -1,0 +1,27 @@
+# kubectl config use-context k8s-c1-H
+# kubectl run pod1 -n default --image=httpd:2.4.41-alpine --dry-run=client -o yaml > pod1.yaml
+## Get the master "key name" and add to the pod1 'tolerations' 
+# kubectl describe node cluster1-master1 | grep Labels -A 10
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: pod1
+  name: pod1
+  namespace: default
+spec:
+  containers:
+  - image: httpd:2.4.41-alpine
+    name: pod1-container                  # change
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+  tolerations:                            # add
+  - effect: NoSchedule                    # add
+    key: node-role.kubernetes.io/master   # add
+  nodeSelector:                           # add
+    node-role.kubernetes.io/master: ""    # add
+status: {}
