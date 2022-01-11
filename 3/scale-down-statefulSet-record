@@ -1,0 +1,3 @@
+kubectl -n project-c13 scale sts o3db --replicas 1 --record
+# check the record
+kubectl -n project-c13 describe sts o3db 
