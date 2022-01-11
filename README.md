@@ -126,3 +126,17 @@ kubeadm token create --print-join-command
 ```
 kubectl get nodes
 ```
+
+
+
+#### To remove a worker-nodes from the cluster 
+```
+# Find the nodes with
+kubectl get nodes
+# Drain it with 
+kubectl drain NODE-NAME
+# Delete it with 
+kubectl delete node "NODE-NAME"
+# If using kubeadm, run on “NODE-NAME” itself 
+kubeadm reset
+```
