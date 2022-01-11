@@ -133,10 +133,10 @@ kubectl get nodes
 ```
 # Find the nodes with
 kubectl get nodes
-# Drain it with 
-kubectl drain NODE-NAME
+# Drain it with "all pods will be taking down"
+kubectl drain NODE-NAME --ignore-daemonsets --force
 # Delete it with 
-kubectl delete node "NODE-NAME"
+kubectl delete node "NODE-NAME" 
 # If using kubeadm, run on “NODE-NAME” itself 
 kubeadm reset
 ```
