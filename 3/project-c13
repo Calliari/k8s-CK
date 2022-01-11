@@ -1,0 +1,35 @@
+kubectl create namespcae project-c13
+
+cat <<EOF>statefulset-o3db.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: o3db
+  name: o3db
+  namespace: project-c13
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: o3db
+  serviceName: "o3db"
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: o3db
+    spec:
+      containers:
+      - image: nginx
+        imagePullPolicy: Always
+        name: nginx
+        resources: {}
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+EOF
+
+
