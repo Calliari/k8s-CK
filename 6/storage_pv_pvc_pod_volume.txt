@@ -1,0 +1,71 @@
+## create a namespace project-tiger
+# kubectl create namespace project-tiger
+
+# copied from kubernetes docs
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: safari-pv
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/Volumes/Data"
+
+
+# copied from kubernetes docs
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: safari-pvc
+  namespace: project-tiger
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+
+# kubectl  create deployment safari -n project-tiger --image=httpd:2.4.41-alpine --dry-run=client -o yaml
+# add the 'volumes' and 'volumeMounts' manualy, templete from kubernetes docs
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: safari
+  name: safari
+  namespace: project-tiger
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: safari
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: safari
+    spec:
+      volumes:
+         - name: task-pv-storage
+           persistentVolumeClaim:
+             claimName: safari-pvc
+      containers:
+      - image: httpd:2.4.41-alpine
+        name: httpd
+        resources: {}
+        volumeMounts:
+          - mountPath: "/tmp/safari-data"
+            name: task-pv-storage
+status: {}
