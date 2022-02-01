@@ -1,0 +1,70 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-am-i-ready
+spec:
+  selector:
+    id: cross-server-ready
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+
+# kubectl run ready-if-service-ready --image=nginx:1.16.1-alpine --dry-run=client -o yaml
+# add the 'livenessProbe' and 'readinessProbe' manually
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: ready-if-service-ready
+  name: ready-if-service-ready
+  namespace: default
+spec:
+  containers:
+  - image: nginx:1.16.1-alpine
+    name: ready-if-service-ready
+    resources: {}
+    livenessProbe:
+      exec:
+        command:
+        - "true"
+    readinessProbe:
+      exec:
+        command: ['sh', '-c', 'wget -T2 -O- http://service-am-i-ready:80']
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+
+
+# kubectl run am-i-ready --image=nginx:1.16.1-alpine --labels="id=cross-server-ready" --dry-run=client -o yaml
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    id: cross-server-ready
+  name: am-i-ready
+  namespace: default
+spec:
+  containers:
+  - image: nginx:1.16.1-alpine
+    name: am-i-ready
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+
+
+# kubectl apply -f file.yaml
+# or kubectl apply --force=true -f file.yaml
+
+## check if pod 'ready-if-service-ready' got ready after pod is 'am-i-ready' running and service is attached to it
+# kubectl get pod ready-if-service-ready
+
+## chekc if the 'Endpoints' of the service matches the pod 'am-i-ready'
+# kubectl describe svc service-am-i-ready
