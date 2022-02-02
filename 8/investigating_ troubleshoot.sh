@@ -1,17 +1,19 @@
-investigation on the cluster set up 
+# Investigation on the cluster set up:
+
+===========================================================
 kubelet: [TYPE]
 kube-apiserver: [TYPE]
 kube-scheduler: [TYPE]
 kube-controller-manager: [TYPE]
 etcd: [TYPE]
 dns: [TYPE] [NAME]
-
+-------------------------------------------
 # Choices of [TYPE] are: 
 not-installed
 process
 static-pod
 pod
-
+===========================================================
 ####### Commnads
 #### find processes
 ps aux | grep kubelet 
@@ -19,7 +21,6 @@ ps aux | grep kubelet
 #### check manifest set up
 find /etc/systemd/system/ | grep kube
 find /etc/systemd/system/ | grep etcd
-
 
 #### check pods runnig in master and on the namespace 'kube-system'
 kubectl -n kube-system get pod -o wide | grep master1
@@ -37,4 +38,12 @@ kubectl describe ReplicaSet/coredns-78fcd69978 -n kube-system | grep Controlled
 Controlled By:  Deployment/coredns
 
 
-
+So the answer will be:
+===========================================================
+kubelet: process
+kube-apiserver: static-pod
+kube-scheduler: static-pod
+kube-scheduler-special: static-pod 
+kube-controller-manager: static-pod
+etcd: static-pod
+dns: pod coredns
