@@ -6,10 +6,3 @@ etcd: static-pod
 dns: pod coredns
 
 
-
-# Choices of [TYPE] are: 
-not-installed
-process
-static-pod
-pod
-
