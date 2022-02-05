@@ -6,7 +6,7 @@ NAMESPACE       NAME                                       READY   STATUS    RES
 kube-system     kube-scheduler-cluster1-master1            1/1     Running   0             14m     172.31.37.190     cluster1-master1   <none>           <none>
 ```
 
-### With that its probably running on the kubernetes' manifest directory `/etc/kubernetes/manifests`
+##### With that its probably running on the kubernetes' manifest directory `/etc/kubernetes/manifests`
 So just move the file `kube-scheduler.yaml` will stop temporarily stop the kube-scheduler'.
 ```
 mkdir /etc/kubernetes/manifests/stopped-tmp/
@@ -17,7 +17,7 @@ mv /etc/kubernetes/manifests/kube-scheduler.yaml  /etc/kubernetes/manifests/stop
 ```
 kubectl get pod -A -o wide | grep -E 'NAME|scheduler' 
 ```
- ##### Create a single Pod named `manual-schedule` of image `httpd:2.4-alpine` on node `cluster2-master1`, Make sure it's running.
+##### Create a single Pod named `manual-schedule` of image `httpd:2.4-alpine` on node `cluster2-master1`, Make sure it's running.
 ```
 # kubectl run -h # for help
 kubectl run manual-schedule --image=httpd:2.4-alpine --dry-run=client -o yaml > pod-manual-schedule.yml # add the spec.nodeName: cluster1-master1
