@@ -1,5 +1,5 @@
-## Temporarily stop the kube-scheduler, this means in a way that you can start it again afterwards
-# find the "kube-scheduler" pod first and all its details 
+### Temporarily stop the kube-scheduler, this means in a way that you can start it again afterwards
+## find the "kube-scheduler" pod first and all its details 
 ```
 $ kubectl get pod -A -o wide | grep -E 'NAME|scheduler'
 NAMESPACE       NAME                                       READY   STATUS    RESTARTS      AGE     IP                NODE               NOMINATED NODE   READINESS GATES
