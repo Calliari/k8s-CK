@@ -1,5 +1,5 @@
-### Temporarily stop the kube-scheduler, this means in a way that you can start it again afterwards
-## find the "kube-scheduler" pod first and all its details 
+#### Temporarily stop the kube-scheduler, this means in a way that you can start it again afterwards
+##### find the "kube-scheduler" pod first and all its details 
 ```
 $ kubectl get pod -A -o wide | grep -E 'NAME|scheduler'
 NAMESPACE       NAME                                       READY   STATUS    RESTARTS      AGE     IP                NODE               NOMINATED NODE   READINESS GATES
@@ -17,7 +17,7 @@ mv /etc/kubernetes/manifests/kube-scheduler.yaml  /etc/kubernetes/manifests/stop
 ```
 kubectl get pod -A -o wide | grep -E 'NAME|scheduler' 
 ```
- ### Create a single Pod named `manual-schedule` of image `httpd:2.4-alpine` on node `cluster2-master1`, Make sure it's running.
+ ##### Create a single Pod named `manual-schedule` of image `httpd:2.4-alpine` on node `cluster2-master1`, Make sure it's running.
 ```
 # kubectl run -h # for help
 kubectl run manual-schedule --image=httpd:2.4-alpine --dry-run=client -o yaml > pod-manual-schedule.yml # add the spec.nodeName: cluster1-master1
@@ -42,18 +42,18 @@ spec:
 status: {}
 ```
 
-#### create the pod, it will run on the master `cluster1-master1`, because scheduer is 'stopped'.
+##### create the pod, it will run on the master `cluster1-master1`, because scheduer is 'stopped'.
 ```
 kubectl apply -f pod-manual-schedule.yml
 ```
 
-#### Start the kube-scheduler again, just move the file back `kube-scheduler.yaml` where it was.
+##### Start the kube-scheduler again, just move the file back `kube-scheduler.yaml` where it was.
 ```
 mv /etc/kubernetes/manifests/stopped-tmp/kube-scheduler.yaml /etc/kubernetes/manifests/
 ```
 
 
-#### creating a second Pod named `manual-schedule2` of image `httpd:2.4-alpine` and check if it's running on workernode, not on the master.
+##### creating a second Pod named `manual-schedule2` of image `httpd:2.4-alpine` and check if it's running on workernode, not on the master.
 ```
 kubectl run manual-schedule2 --image=httpd:2.4-alpine # it shoud run on the one fo the workernode now as the scheduler is back doing its job.
 ```
