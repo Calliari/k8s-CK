@@ -35,7 +35,7 @@ kubectl -n kube-system describe pod coredns-78fcd69978-zfmcd | grep Controlled
 
 ## how they (ReplicaSet/coredns-***) are managed ?
 kubectl describe ReplicaSet/coredns-78fcd69978 -n kube-system | grep Controlled
-Controlled By:  Deployment/coredns
+Controlled By:  Deployment/coredns # ahaa, now I found the object that manages the dns-pod 'coredns' and it's the "Deployment" object.
 
 
 So the answer will be:
