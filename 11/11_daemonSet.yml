@@ -1,4 +1,4 @@
-daemonSet.yml
+---
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
