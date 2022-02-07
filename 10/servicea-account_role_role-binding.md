@@ -13,8 +13,22 @@ kubectl create role processor -n project-hamster --verb=create --resource=secret
 kubectl create rolebinding processor -n project-hamster --role=processor --serviceaccount=project-hamster:processor --dry-run=client -o yaml
 ```
 
-#### Test our RBAC setup we can use `kubectl auth can-i`
+#### Test our RBAC setup we can use `kubectl auth can-i` with options to check 
 ```
-k auth can-i -h # examples
+kubectl auth can-i -h # examples
+kubectl options # for options and Username to impersonate for the operation
+```
 
+Like:
 ```
+k -n project-hamster auth can-i create secret --as system:serviceaccount:project-hamster:processor
+
+k -n project-hamster auth can-i create configmap --as system:serviceaccount:project-hamster:processor
+
+k -n project-hamster auth can-i create pod --as system:serviceaccount:project-hamster:processor
+
+k -n project-hamster auth can-i delete secret --as system:serviceaccount:project-hamster:processor
+
+k -n project-hamster auth can-i get configmap --as system:serviceaccount:project-hamster:processor
+```
+
