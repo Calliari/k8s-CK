@@ -6,7 +6,9 @@ In a way we kind of simulate the behaviour of a DaemonSet here, but using a Depl
 
 
 ##### kubectl create deployment deploy-important --image=nginx:1.17.6-alpine -n project-tiger --dry-run=client -o yaml > deploy-important.yaml
+
 ```
+Modify accordingly with the description above
 ---
 apiVersion: apps/v1
 kind: Deployment
