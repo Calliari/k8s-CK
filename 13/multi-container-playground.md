@@ -8,3 +8,53 @@ Check the logs of container c3 to confirm correct setup.
 
 
 ##### kubectl run multi-container-playground --image=nginx:1.17.6-alpine -n default --dry-run=client -o yaml > multi-container-playground.yaml
+
+
+```
+# modify to have the volumes, the env variable and the commands accordingly with the container
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: multi-container-playground
+  name: multi-container-playground
+  namespace: default
+spec:
+  volumes:
+  - name: vol
+    hostPath:
+      path: /data
+  containers:
+  - image: nginx:1.17.6-alpine
+    name: c1
+    env:
+    - name: MY_NODE_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
+    volumeMounts:
+    - name: vol
+      mountPath: /data
+  - image: busybox:1.31.1
+    name: c2
+    command: ['/bin/sh', '-c', 'while true; do date >> /data/date.log; sleep 1; done']
+    volumeMounts:
+    - name: vol
+      mountPath: /data
+  - image: busybox:1.31.1
+    name: c3
+    command: ['/bin/sh','-c','tail -f /data/date.log']
+    volumeMounts:
+    - name: vol
+      mountPath: /data
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+```
+
+#### check the logs from the container `c3`
+```
+kubectl logs -n default multi-container-playground -c c3
+```
