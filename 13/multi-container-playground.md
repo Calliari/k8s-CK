@@ -7,4 +7,4 @@ There should be a volume attached to that Pod and mounted into every container, 
 Check the logs of container c3 to confirm correct setup.
 
 
-# kubectl run multi-container-playground --image=nginx:1.17.6-alpine -n default --dry-run=client -o yaml > multi-container-playground.yaml
+##### kubectl run multi-container-playground --image=nginx:1.17.6-alpine -n default --dry-run=client -o yaml > multi-container-playground.yaml
