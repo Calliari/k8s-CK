@@ -9,3 +9,8 @@ kubectl get pods -A -o wide | grep 'cluster2-worker'
 ```
 kubectl delete pod kube-proxy-8lhzc -n kube-system
 ```
+
+##### check the events:
+```
+kubectl get events -A --sort-by=.metadata.creationTimestamp
+```
