@@ -5,7 +5,14 @@
 kubectl describe kube-proxy-8lhzc -n kube-system | grep containerd
 ```
 
-##### Kill `containerd` conatiner running on the `kube-proxy` by:
+##### Kill `containerd` conatiner running on the `kube-proxy` on the node by:
 ```
+# ssh into the node wher teh conatner is running
+ssh node2
 
+# check the container running
+crictl ps | grep kube-proxy
+
+# Kill the container 
+crictl rm -f 1e020b43c4423
 ```
