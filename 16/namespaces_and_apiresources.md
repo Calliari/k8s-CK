@@ -21,7 +21,7 @@ project-snake
 project-tiger
 ```
 
-##### check the number of role for each one (passing --no-headers) means no showing the row [NAME STATUS AGE] when the output is diplaied.
+##### check the number of role for each one (passing --no-headers) means not showing the row [NAME STATUS AGE] when the output is displayed.
 ```
 kubectl get role -n project-c13 --no-headers
 kubectl get role -n project-c14 --no-headers
