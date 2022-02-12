@@ -3,20 +3,29 @@
 ##### Then add this node to the cluster. Use kubeadm for this
 ```
 kubectl drain $NODENAME --ignore-daemonsets --force
-ssh $NODENAME
-
+kubeadm token create --print-join-command # save this output
 ```
 
 ##### replace x in 1.22.x-00 with the latest patch version
 ```
-apt-mark unhold kubelet kubectl && \
-apt-get update && apt-get install -y kubelet=1.22.x-00 kubectl=1.22.x-00 && \
+ssh $NODENAME
+kubeadm upgrade node
+
+apt-mark unhold kubelet kubectl && apt-get update && \
+apt-get install -y kubelet=1.22.x-00 kubectl=1.22.x-00 && \
 apt-mark hold kubelet kubectl
+
+# check versions 
+kubeadm version
+kubectl version
+kubelet --version
 ```
 
 ##### Restart the kubelet:
 ```
 sudo systemctl daemon-reload && sudo systemctl restart kubelet
+kubeadm join # command output from kubeadm token create ran on the control-plane
+
 ```
 
 ##### Bring the node back online by marking it schedulable:
