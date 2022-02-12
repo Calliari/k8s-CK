@@ -21,7 +21,7 @@ sudo systemctl restart kubelet
 # check the path with CMD: whereis kubelet
 kubelet: /usr/bin/kubelet
 
-#Identify that the path was wrong, correcting it looking from the status where is show the service file at 'sudo systemctl status kubelet':
+# After identify the path was wrong, correcting it looking from the status where is show the service file at 'sudo systemctl status kubelet':
 #  Drop-In: /etc/systemd/system/kubelet.service.d
 #           └─10-kubeadm.conf
 
