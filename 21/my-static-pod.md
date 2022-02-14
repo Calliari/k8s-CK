@@ -1,8 +1,9 @@
-<b> Create a Static Pod named `my-static-pod` in Namespace default on `cluster3-master1`.  </b>
-##### It should be of image nginx:1.16-alpine and have resource requests for `10m` CPU and `20Mi` memory.
-##### Then create a `NodePort` Service named `static-pod-service` which exposes that static Pod on `port 80` and 
-##### check if it has Endpoints and if its reachable through the `cluster3-master1` internal IP address. 
-##### You can connect to the internal node IPs from your main terminal.
+<b> Create a Static Pod named `my-static-pod` in Namespace default on `cluster3-master1`. 
+It should be of image nginx:1.16-alpine and have resource requests for `10m` CPU and `20Mi` memory.
+Then create a `NodePort` Service named `static-pod-service` which exposes that static Pod on `port 80` and 
+check if it has Endpoints and if its reachable through the `cluster3-master1` internal IP address. 
+You can connect to the internal node IPs from your main terminal.
+ </b>
 ```
 kubectl run my-static-pod --image=nginx:1.16-alpine --dry-run=client -o yaml  -n default > my-static-pod.yaml
 ```
