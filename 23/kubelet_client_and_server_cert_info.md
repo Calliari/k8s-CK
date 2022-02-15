@@ -25,7 +25,7 @@ openssl x509 -text -in /var/lib/kubelet/pki/kubelet-client-current.pem | grep -i
 ```
 # check the server cert in the node 'Issuer'
 openssl x509 -text -in /var/lib/kubelet/pki/kubelet.crt | grep -i 'issuer'
-    Issuer: CN=node2-ca@1643744159
+    Issuer: CN=node2-ca@1335522159
     
 # check the server cert in the node 'Extended Key Usage'
 openssl x509 -text -in /var/lib/kubelet/pki/kubelet.crt | grep -i 'Extended Key Usage' -A1
