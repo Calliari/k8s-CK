@@ -14,6 +14,7 @@ ps aux | grep kubelet # look at the dir '--config=/var/lib/kubelet/'
 # check the client cert in the node 'Issuer'
 openssl x509 -text -in /var/lib/kubelet/pki/kubelet-client-current.pem | grep -i 'issuer'
     Issuer: CN=kubernetes
+    
 # check the client cert in the node 'Extended Key Usage'
 openssl x509 -text -in /var/lib/kubelet/pki/kubelet-client-current.pem | grep -i 'Extended Key Usage' -A1
     X509v3 Extended Key Usage: TLS Web Client Authentication
@@ -25,6 +26,7 @@ openssl x509 -text -in /var/lib/kubelet/pki/kubelet-client-current.pem | grep -i
 # check the server cert in the node 'Issuer'
 openssl x509 -text -in /var/lib/kubelet/pki/kubelet.crt | grep -i 'issuer'
     Issuer: CN=node2-ca@1643744159
+    
 # check the server cert in the node 'Extended Key Usage'
 openssl x509 -text -in /var/lib/kubelet/pki/kubelet.crt | grep -i 'Extended Key Usage' -A1
     X509v3 Extended Key Usage: TLS Web Server Authentication
