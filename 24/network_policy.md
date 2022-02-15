@@ -31,11 +31,11 @@ spec:
       - podSelector:
           matchLabels:
             app: db1
-      ports:                        # second condition "port"
+      ports:                        # first condition "port"
       - protocol: TCP
         port: 1111
     -                           # second rule
-      to:                           # first condition "to"
+      to:                           # second condition "to"
       - podSelector:
           matchLabels:
             app: db2
