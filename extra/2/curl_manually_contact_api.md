@@ -10,8 +10,8 @@ You can ignore insecure https connection. Write the command(s) for this into fil
 kubectl -n project-hamster get secret
 ```
 
+##### Create a Pod of image `curlimages/curl:7.65.3` named `tmp-api-contact` which uses this ServiceAccount
 ```
-# Create a Pod of image `curlimages/curl:7.65.3` named `tmp-api-contact` which uses this ServiceAccount
 kubectl run tmp-api-contact --image=curlimages/curl:7.65.3 --dry-run=client -o yaml -n project-hamster --command -- sh -c 'sleep 1d' > tmp-api-contact.yaml
 vim tmp-api-contact.yaml # and add the ServiceAccount "  serviceAccountName: secret-reader"
 ```
