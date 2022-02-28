@@ -11,11 +11,15 @@ metadata:
 EOF
 
 ```
-##### Test the access 
+##### Test the access (using the 'default' namespace)
 ```
 k auth can-i get secret --as system:serviceaccount:project-hamster:secret-reader
 ```
 
+##### Test the access (using the 'project-hamster' namespace)
+```
+k auth can-i get secret --as system:serviceaccount:project-hamster:secret-reader -n project-hamster
+```
 
 If the POD need to "get" the secret a (Role and RoleBinding) are needed
 ```
