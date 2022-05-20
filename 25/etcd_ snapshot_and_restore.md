@@ -50,6 +50,15 @@ ETCDCTL_API=3 etcdctl snapshot save ./etcd-backup.db \
 kubectl run test-pod --image=nginx
 ```
 
+##### Backup the cluster with etcd
+```
+# SAMPLE 1 - ETCD snapshot with endpoint
+ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key snapshot save snapshotdb-bkp
+
+# SAMPLE 2 - ETCD snapshot with endpoint
+ETCDCTL_API=3 etcdctl --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key snapshot save snapshotdb-bkp
+```
+
 ##### Finally restore the backup, confirm the cluster is still working and that the created Pod is no longer with us.
 ```
 # Stop all the pods
