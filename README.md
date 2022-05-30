@@ -89,8 +89,8 @@ EOF
 #### (4) Update apt package index, install kubelet, kubeadm and kubectl, and pin their version:
 ```
 sudo apt-get update
-KUBE_VERSION_COMPONENTS=1.20.1-00
-sudo apt-get install -y kubelet=$KUBE_VERSION_COMPONENTS kubeadm=$KUBE_VERSION_COMPONENTS kubectl=$KUBE_VERSION_COMPONENTS
+KUBE_COMPONENT_VERSION=1.20.1-00
+sudo apt-get install -y kubelet=$KUBE_COMPONENT_VERSION kubeadm=$KUBE_COMPONENT_VERSION kubectl=$KUBE_COMPONENT_VERSION
 sudo apt-mark hold kubelet kubeadm kubectl # prevent automatic update 
 ```
 
