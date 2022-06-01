@@ -25,6 +25,7 @@ Which suffix will static pods have that run on cluster1-worker1?
 4: [ANSWER] --> calico, /etc/cni/net.d/10-calico.conflist
 ```
 ```
+# kubectl get pod -o wide  -A | grep -E 'cluster1-master1'
 5: [command]--> The suffix is the node hostname with a leading hyphen, to check the nodes hostname (`$ kubectl get nodes `)
 5: [ANSWER] --> -cluster1-worker1
 ```
