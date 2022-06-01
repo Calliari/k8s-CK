@@ -56,7 +56,7 @@ status: {}
 
 #### check the env-variable from the container `c1`
 ```
-kubectl exec -n default multi-container-playground -c c3 -- printenv MY_NODE_NAME
+kubectl exec -n default multi-container-playground -c c1 -- printenv MY_NODE_NAME
 ```
 
 #### check the logs from the container `c3`, if the "date" logs have been create on the container `c2` it will be available on the `c3`
