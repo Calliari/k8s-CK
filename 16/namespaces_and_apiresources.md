@@ -34,3 +34,11 @@ kubectl get role -n project-tiger --no-headers
 ```
 echo "project-c14 with 300 resources" > /opt/course/16/crowded-namespace.txt
 ```
+
+##### A better way of doing the search all in one goal (show all roles )
+```
+kubectl get role --all-namespaces --sort-by=metadata.name
+# 'project-c14' project has the highest number of roles 
+kubectl get role -n project-c14 --no-headers | wc -l 
+```
+
