@@ -3,7 +3,7 @@ k8s-CKAD traing for the certification (Kubernetes)
 
 References https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
 
-Playground for testing and practing, online cluster https://killercoda.com/playgrounds/scenario/cka and https://killer.sh/
+Playground for testing and practing, online cluster https://killercoda.com/playgrounds/scenario/cka , https://killer.sh/ , https://killercoda.com
 
 ### (This need to be done in all nodes and control node as well)
 #### Letting iptables see bridged traffic 
