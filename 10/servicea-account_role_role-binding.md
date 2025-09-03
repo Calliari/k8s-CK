@@ -4,7 +4,7 @@ kubectl create namespace project-hamster
 kubectl create serviceaccount processor
 ```
 
-#### Create a `Role` and `RoleBinding`, both named `processor` as well. These should allow the new `SA` to only create `Secrets` and `ConfigMaps` in that Namespace.
+#### Create a `Role` and `RoleBinding`, both named `processor` as well. These should allow the new `SA` to only create `Secrets` and `ConfigMaps` in that Namespace. verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
 ```
 # get the dry-run examples from - kubectl create role -h
 kubectl create role processor -n project-hamster --verb=create --resource=secrets,configmaps --dry-run=client -o yaml
