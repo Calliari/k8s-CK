@@ -9,6 +9,7 @@ metadata:
   name: my-sc-manual
 provisioner: kubernetes.io/no-provisioner
 volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
 
 # copied from kubernetes docs "" (PV must be ≥ what PVC can claim)
 ---
