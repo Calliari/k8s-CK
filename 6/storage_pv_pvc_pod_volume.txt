@@ -1,7 +1,16 @@
 ## create a namespace project-tiger
 # kubectl create namespace project-tiger
 
-# copied from kubernetes docs
+# the storageClassName is what bond the PV and PVC together
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: my-sc-manual
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+
+# copied from kubernetes docs "" (PV must be ≥ what PVC can claim)
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -10,9 +19,9 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: manual
+  storageClassName: my-sc-manual
   capacity:
-    storage: 2Gi
+    storage: 3Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
@@ -27,12 +36,13 @@ metadata:
   name: safari-pvc
   namespace: project-tiger
 spec:
-  storageClassName: manual
+  storageClassName: my-sc-manual
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 2Gi
+
 
 # kubectl  create deployment safari -n project-tiger --image=httpd:2.4.41-alpine --dry-run=client -o yaml
 # add the 'volumes' and 'volumeMounts' manualy, templete from kubernetes docs
