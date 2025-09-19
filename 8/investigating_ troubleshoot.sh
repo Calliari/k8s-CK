@@ -1,5 +1,8 @@
 # Investigation on the cluster set up:
 
+# a good pod to troubleshoot the cluster (nicolaka/netshoot)
+i.e: kubectl run netshoot --image=nicolaka/netshoot --command -- sleep 5d
+
 ===========================================================
 kubelet: [TYPE]
 kube-apiserver: [TYPE]
