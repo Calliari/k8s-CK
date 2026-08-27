@@ -1,6 +1,7 @@
 resources:
 - ../base
 namePrefix: dev-
+namespace: dev
 patches:
   - path: deployment.yaml
   - path: service.yaml
