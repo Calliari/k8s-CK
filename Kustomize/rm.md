@@ -13,3 +13,10 @@ To test the prod Kustomize run:
 ```
 kubectl kustomize ./prod
 ```
+
+
+To apply after checking; 
+```
+#kubectl apply -k <kustomization directory>/
+kubectl apply -k dev/
+```
