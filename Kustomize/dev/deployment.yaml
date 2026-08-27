@@ -4,3 +4,13 @@ metadata:
   name: my-nginx
 spec:
   replicas: 2
+  template:
+    spec:
+      containers:
+        - name: nginx
+          command:
+            - /bin/sh
+            - -c
+            - |
+              hostname > /tmp/hostname-container
+              nginx -g 'daemon off;'
