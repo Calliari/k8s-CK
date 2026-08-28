@@ -13,5 +13,3 @@ spec:
         run: my-nginx
     spec:
       containers:
-      - image: nginx
-        name: nginx
