@@ -6,17 +6,17 @@ kubectl kustomize ./base
 
 To test the dev Kustomize run:
 ```
-kubectl kustomize ./dev
+kubectl kustomize ./overlays/dev
 ```
 
 To test the prod Kustomize run:
 ```
-kubectl kustomize ./prod
+kubectl kustomize ./overlays/prod
 ```
 
 
 To apply after checking; 
 ```
-#kubectl apply -k <kustomization directory>/
-kubectl apply -k dev/
+#kubectl apply -k <kustomization path directory>/
+kubectl apply -k ./overlays/dev
 ```
