@@ -1,7 +1,15 @@
 resources:
-- ../base
+- ../../base
+
 namePrefix: dev-
+nameSuffix: -v1
+
 namespace: dev
+
+labels:
+- pairs:
+    env: dev 
+    
 patches:
   - path: deployment.yaml
   - path: service.yaml
