@@ -7,7 +7,8 @@ nameSuffix: -v1
 namespace: prod
 
 labels:
-- pairs:
+- includeSelectors: true
+  pairs:
     env: prod 
     
 patches:
