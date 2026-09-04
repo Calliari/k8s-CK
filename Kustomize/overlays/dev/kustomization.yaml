@@ -7,7 +7,8 @@ nameSuffix: -v1
 namespace: dev
 
 labels:
-- pairs:
+- includeSelectors: true
+  pairs:
     env: dev 
     
 patches:
